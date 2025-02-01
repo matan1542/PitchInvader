@@ -1,7 +1,7 @@
 {
-  "name": "react-squad-builder",
+  "name": "pitch-invader",
   "private": false,
-  "version": "0.0.19",
+  "version": "1.0.0",
   "type": "module",
   "files": [
     "dist"
@@ -9,7 +9,7 @@
   "description": "React library designed to simplify the process of creating and managing a football (soccer) starting lineup.",
   "repository": {
     "type": "git",
-    "url": "https://github.com/Lestoven/react-squad-builder.git"
+    "url": "https://github.com/matan1542/PitchInvader"
   },
   "scripts": {
     "dev": "vite",
