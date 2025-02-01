@@ -1,10 +1,21 @@
 import { Button, Modal } from 'flowbite-react';
-import { getUserLanguage, translate } from './i18n/translate'
+import { translate } from './i18n/translate'
 import PlayerCard from './PlayerCard'
 import { Fragment } from 'react';
 import { isSelected } from './utils';
+import { Player } from '../types';
+import React from 'react'
 
-export default function PlayerSelectModal({ playerSelectModalOpen, setPlayerSelectModalOpen, currentPositionType, availablePlayers, addPlayerToPitch, selectedPlayers, lang }) {
+interface PlayerSelectModalProps {
+    playerSelectModalOpen: boolean;
+    setPlayerSelectModalOpen: (open: boolean) => void;
+    currentPositionType: string;
+    availablePlayers: Player[];
+    addPlayerToPitch: (player: Player) => void;
+    selectedPlayers: Player[];
+    lang: string | null;
+}
+export default function PlayerSelectModal({ playerSelectModalOpen, setPlayerSelectModalOpen, currentPositionType, availablePlayers, addPlayerToPitch, selectedPlayers, lang }: PlayerSelectModalProps) {
     let suitablePlayers = availablePlayers.filter((player) => (player.positionType === currentPositionType ||
         player["alternativePositions"].split(/[,;\/\s]+/).includes(currentPositionType)) &&
         isSelected(selectedPlayers, player) === false);

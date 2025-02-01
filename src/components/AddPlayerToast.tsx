@@ -1,8 +1,17 @@
+import React from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faShirt } from '@fortawesome/free-solid-svg-icons'
-import { getUserLanguage, translate } from './i18n/translate'
+import { translate } from './i18n/translate'
+import { Player } from '../types'
 
-function AddPlayerToast({ isOpen, setIsOpen, player, setSelectedPlayerFromBench, lang }) {
+interface AddPlayerToastProps {
+    isOpen: boolean
+    setIsOpen: (isOpen: boolean) => void
+    player: Player
+    setSelectedPlayerFromBench: (player: Player | null) => void
+    lang: string | null
+}
+function AddPlayerToast({ isOpen, setIsOpen, player, setSelectedPlayerFromBench, lang }: AddPlayerToastProps) {
     const toggleToast = () => {
         setIsOpen(!isOpen)
     };

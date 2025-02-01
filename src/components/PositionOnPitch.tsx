@@ -2,6 +2,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPlus, faShirt, faCircleXmark } from '@fortawesome/free-solid-svg-icons'
 import { DISPLAY_SHIRT_ATTRIBUTES } from '../types'
 import { Player, Position, ColorSettings } from '../types'
+import React from 'react'
 
 interface PositionOnPitchProps {
     selectedPlayerFromBench: Player | null;

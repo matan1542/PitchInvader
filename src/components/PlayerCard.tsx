@@ -1,8 +1,17 @@
+import React from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faShirt } from '@fortawesome/free-solid-svg-icons'
-import { getUserLanguage, translate } from './i18n/translate'
+import { translate } from './i18n/translate'
+import { Player } from '../types'
 
-export default function PlayerCard({ player, id, onClickFunc, showPosition = true, lang }) {
+interface PlayerCardProps {
+    player: Player
+    id: number
+    onClickFunc: () => void
+    showPosition?: boolean
+    lang: string | null
+}
+export default function PlayerCard({ player, id, onClickFunc, showPosition = true, lang }: PlayerCardProps) {
     return (
         <div key={id} className="player-card p-4 max-w-lg border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 flex flex-col" style={{ background: 'linear-gradient(to bottom, rgb(0, 0, 0), rgb(200, 130, 0))' }}>
             <div className="relative mt-2 flex items-center justify-center">

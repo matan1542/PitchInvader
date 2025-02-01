@@ -1,6 +1,7 @@
 import App from './App'
 import './index.css'
 import { Player } from '../types'
+import React from 'react'
 
 interface SquadBuilderProps {
   players: Player[];

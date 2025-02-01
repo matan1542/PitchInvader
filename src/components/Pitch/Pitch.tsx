@@ -9,14 +9,14 @@ import domtoimage from 'dom-to-image-more';
 import footballPitchMobile from "../assets/football_pitch_mobile.svg"
 import footballPitchDesktop from "../assets/football_pitch_cropped.png"
 import { Player } from '../../types/index.js';
-
+import React from 'react';
 interface PitchProps {
     renderPositions: () => React.ReactNode;
     renderFormationSelector: () => JSX.Element;
     availablePlayers: Player[];
     selectedPlayers: Player[];
     selectedPlayerFromBench: Player | null;
-    setSelectedPlayerFromBench: (player: Player) => void;
+    setSelectedPlayerFromBench: (player: Player | null) => void;
     isToastOpen: boolean;
     setIsToastOpen: (isOpen: boolean) => void;
     setSettingsModalOpen: (isOpen: boolean) => void;
@@ -98,7 +98,7 @@ export default function Pitch({ renderPositions, renderFormationSelector, availa
                     <div className="md:col-span-2 football-pitch flex items-center justify-center mt-1" id="pitch-content">
                         <div className="wrapper flex justify-content-center">
                             <div className="relative">
-                                <img src={footballPitchMobile} alt="Soccer Pitch" className="block xl:hidden" />
+                                <img src={footballPitchMobile} alt="Soccer Pitch Mobile" className="block xl:hidden" />
                                 <img src={footballPitchDesktop} alt="Soccer Pitch" className="hidden xl:block rounded-md h-screen object-cover p-2" />
                                 {renderPositions()}
                             </div>
@@ -110,7 +110,7 @@ export default function Pitch({ renderPositions, renderFormationSelector, availa
                                 return (
                                     <Fragment key={id}>
                                         {isSelected(selectedPlayers, player) === false ? // If we cant find it in the selectedPlayers (starting XI)
-                                            <PlayerCard player={player} id={id} onClickFunc={() => addPlayerFromBench(player)} showPosition={true} lang={lang} />
+                                            <PlayerCard player={player} id={id} onClickFunc={() => addPlayerFromBench(player)} showPosition={true} lang={lang as string} />
                                             :
                                             <></>
                                         }
@@ -122,7 +122,7 @@ export default function Pitch({ renderPositions, renderFormationSelector, availa
                     </div>
                 </div>
             </div>
-            <AddPlayerToast isOpen={isToastOpen} setIsOpen={setIsToastOpen} player={selectedPlayerFromBench} setSelectedPlayerFromBench={setSelectedPlayerFromBench} lang={lang} />
+            <AddPlayerToast isOpen={isToastOpen} setIsOpen={setIsToastOpen} player={selectedPlayerFromBench as Player} setSelectedPlayerFromBench={setSelectedPlayerFromBench} lang={lang as string} />
         </>
     )
 }

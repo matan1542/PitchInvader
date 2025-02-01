@@ -1,3 +1,5 @@
+import React from 'react'
+
 import { playersMock } from './__mocks__/playersMock'
 import './App.css'
 import SquadBuilder from './components/SquadBuilder'

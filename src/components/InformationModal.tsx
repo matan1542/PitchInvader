@@ -1,8 +1,16 @@
+import React from 'react'
 import { Button, Modal } from 'flowbite-react';
-import { getUserLanguage, translate } from './i18n/translate'
+import { translate } from './i18n/translate'
 import { HiOutlineExclamationCircle } from "react-icons/hi";
 
-export default function InformationModal({ informationModalOpen, setInformationModalOpen, informationModalType, informationModalMessage, lang }) {
+interface InformationModalProps {
+    informationModalOpen: boolean;
+    setInformationModalOpen: (open: boolean) => void;
+    informationModalType: string;
+    informationModalMessage: string;
+    lang: string | null;
+}
+export default function InformationModal({ informationModalOpen, setInformationModalOpen, informationModalType, informationModalMessage, lang }: InformationModalProps) {
     const modalMessage = informationModalMessage.split(",")
     let playerName = ""
     let originalPosition = ""

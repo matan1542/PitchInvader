@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import Pitch from './Pitch/Pitch.js'
 import PlayerSelectModal from './PlayerSelectModal.js'
 import { renderPositions, renderFormationSelector } from './Pitch/utils/renderers.js'
@@ -33,7 +33,7 @@ function App({ players, defaultJerseyColor, defaultJerseyTextColor, formationTex
     const [selectedPlayers, setSelectedPlayers] = useState<Player[]>([]) // Keeping track of the selected player by the user (a.k.a. members of the starting XI)
     const [selectedPlayerFromBench, setSelectedPlayerFromBench] = useState<Player | null>(null) // The player the user selected from the bench to add to the squad
     const [isToastOpen, setIsToastOpen] = useState(false) // Toast that showing the player that we want add from the bench to the startign XI (selected player)
-    const [shirtDisplayType, setShirtDisplayType] = useState(DISPLAY_SHIRT_ATTRIBUTES.DISPLAY_NUMBER) // State to store what to display on the shirt (shirt Number like "11" or Postition like "ST")
+    const [shirtDisplayType, setShirtDisplayType] = useState<DISPLAY_SHIRT_ATTRIBUTES>(DISPLAY_SHIRT_ATTRIBUTES.DISPLAY_NUMBER) // State to store what to display on the shirt (shirt Number like "11" or Postition like "ST")
 
     const [colorSettings, setColorSettings] = useState<ColorSettings>({ starterShirtColor: defaultJerseyColor, shirtTextColor: defaultJerseyTextColor }) // Keep track of the jersey's colors settings
 

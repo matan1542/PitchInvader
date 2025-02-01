@@ -1,25 +1,37 @@
 import { Button, Modal } from 'flowbite-react';
-import { getUserLanguage, translate } from './i18n/translate'
-import { DISPLAY_NUMBER, DISPLAY_POSITION, DISPLAY_NOTHING } from './ShirtDisplayOptions';
+import { translate } from './i18n/translate'
+import { ColorSettings, DISPLAY_SHIRT_ATTRIBUTES } from '../types';
+import React from 'react'
 
-export default function SettingsModal({ settingsModalOpen, setSettingsModalOpen, shirtDisplayType, setShirtDisplayType, colorSettings, setColorSettings, lang }) {
-    var debounce = function (fn, t) {
-        let timer;
-        return function (...args) {
-            clearTimeout(timer);
-            timer = setTimeout(() => fn(...args), t)
-        }
+interface SettingsModalProps {
+    settingsModalOpen: boolean;
+    setSettingsModalOpen: (open: boolean) => void;
+    shirtDisplayType: string;
+    setShirtDisplayType: (type: DISPLAY_SHIRT_ATTRIBUTES) => void;
+    colorSettings: ColorSettings;
+    setColorSettings: (settings: ColorSettings) => void;
+    lang: string | null;
+}
+export default function SettingsModal({ settingsModalOpen, setSettingsModalOpen, shirtDisplayType, setShirtDisplayType, colorSettings, setColorSettings, lang }: SettingsModalProps) {
+    var debounce = function (fn: (...args: any[]) => void, t: number) {
+        let timer: ReturnType<typeof setTimeout> | null = null;
+        return function (...args: any[]) {
+            if (timer) {
+                clearTimeout(timer);
+            }
+            timer = setTimeout(() => fn(...args), t);
+        };
     }; // Function to delay the setting a state, if state change is called again in "t" milliseconds, it resets teh waiting
 
-    let colorChanger = debounce((obj, value) => setColorSettings({
+    let colorChanger = debounce((obj: string, value: string) => setColorSettings({
         ...colorSettings, [obj]: value // Updating state
     }), 5)
 
-    const handleShirtColorChange = (e) => {
+    const handleShirtColorChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         colorChanger("starterShirtColor", e.target.value)
     }
 
-    const handleShirtTextColorChange = (e) => {
+    const handleShirtTextColorChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         colorChanger("shirtTextColor", e.target.value)
     }
     return (
@@ -29,24 +41,24 @@ export default function SettingsModal({ settingsModalOpen, setSettingsModalOpen,
                 <Modal.Body>
                     <div className="space-y-3">
                         <h2 className="text-purple-600 text-2xl font-extrabold uppercase leading-normal">{translate("menu.jerseyText", lang)}</h2>
-                        <div className={`flex items-center font-sans tracking-tight ${shirtDisplayType === DISPLAY_NUMBER ? "italic" : ""}`}>
-                            <input defaultChecked={shirtDisplayType === DISPLAY_NUMBER} id="number-radio" type="radio" value=""
-                                name="default-radio" onChange={() => setShirtDisplayType(DISPLAY_NUMBER)}
+                        <div className={`flex items-center font-sans tracking-tight ${shirtDisplayType === DISPLAY_SHIRT_ATTRIBUTES.DISPLAY_NUMBER ? "italic" : ""}`}>
+                            <input defaultChecked={shirtDisplayType === DISPLAY_SHIRT_ATTRIBUTES.DISPLAY_NUMBER} id="number-radio" type="radio" value=""
+                                name="default-radio" onChange={() => setShirtDisplayType(DISPLAY_SHIRT_ATTRIBUTES.DISPLAY_NUMBER)}
                                 className="custom-radio w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600
                                                 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"/>
                             <label htmlFor="number-radio" className="ms-2 text-sm font-medium text-gray-900
                                             dark:text-gray-300">{translate("menu.number", lang)}</label>
                         </div>
-                        <div className={`flex items-center font-sans tracking-tight ${shirtDisplayType === DISPLAY_POSITION ? "italic" : ""}`}>
-                            <input defaultChecked={shirtDisplayType === DISPLAY_POSITION} id="position-radio" type="radio" value=""
-                                name="default-radio" onChange={() => setShirtDisplayType(DISPLAY_POSITION)}
+                        <div className={`flex items-center font-sans tracking-tight ${shirtDisplayType === DISPLAY_SHIRT_ATTRIBUTES.DISPLAY_POSITION ? "italic" : ""}`}>
+                            <input defaultChecked={shirtDisplayType === DISPLAY_SHIRT_ATTRIBUTES.DISPLAY_POSITION} id="position-radio" type="radio" value=""
+                                name="default-radio" onChange={() => setShirtDisplayType(DISPLAY_SHIRT_ATTRIBUTES.DISPLAY_POSITION)}
                                 className="custom-radio w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 
                                                 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"/>
                             <label htmlFor="position-radio" className="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">{translate("menu.position", lang)}</label>
                         </div>
-                        <div className={`flex items-center font-sans tracking-tight ${shirtDisplayType === DISPLAY_NOTHING ? "italic" : ""}`}>
-                            <input defaultChecked={shirtDisplayType === DISPLAY_NOTHING} id="nothing-radio" type="radio" value=""
-                                name="default-radio" onChange={() => setShirtDisplayType(DISPLAY_NOTHING)}
+                        <div className={`flex items-center font-sans tracking-tight ${shirtDisplayType === DISPLAY_SHIRT_ATTRIBUTES.DISPLAY_NOTHING ? "italic" : ""}`}>
+                            <input defaultChecked={shirtDisplayType === DISPLAY_SHIRT_ATTRIBUTES.DISPLAY_NOTHING} id="nothing-radio" type="radio" value=""
+                                name="default-radio" onChange={() => setShirtDisplayType(DISPLAY_SHIRT_ATTRIBUTES.DISPLAY_NOTHING)}
                                 className="custom-radio w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 
                                                 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"/>
                             <label htmlFor="nothing-radio"

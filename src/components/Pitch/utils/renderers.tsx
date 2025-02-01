@@ -4,6 +4,7 @@ import PositionOnPitch from '../../PositionOnPitch.js'
 import CustomSelect from '../../CustomSelect.js'
 import { ColorSettings, DISPLAY_SHIRT_ATTRIBUTES, Player, Position } from '../../../types/index.js'
 import { HandleFormationChange, HandlePositionClick } from '../types/index.js'
+import React from 'react'
 
 interface RenderPositionsProps {
     playerPositions: Position[];
