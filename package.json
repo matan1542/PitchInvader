@@ -1,7 +1,7 @@
 {
   "name": "pitch-invader",
   "private": false,
-  "version": "1.0.2",
+  "version": "1.0.5",
   "type": "module",
   "files": [
     "dist"
@@ -68,9 +68,9 @@
     ".": {
       "import": "./dist/react-squad-builder.es.js",
       "require": "./dist/react-squad-builder.umd.js",
-      "styles": "./dist/style.css",
-      "types": "./dist/types/index.d.ts"
+      "styles": "./dist/style.css"
     },
+    "./types": "./dist/types/types/index.d.ts",
     "./css": "./dist/style.css"
   }
 }
